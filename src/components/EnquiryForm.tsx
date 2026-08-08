@@ -1,0 +1,158 @@
+'use client';
+
+import { useState, type FormEvent } from 'react';
+import type { Locale } from '@/lib/i18n';
+import type { Dictionary } from '@/content/dictionary';
+
+type Status = 'idle' | 'sending' | 'success' | 'error';
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Shared field styling — one system: label above, hairline-underlined input. */
+function fieldClasses() {
+  return 'w-full bg-transparent border-b border-line py-3 text-ink placeholder:text-muted/60 focus:border-ink outline-none transition-colors';
+}
+
+export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const t = dict.enquiry;
+  const [status, setStatus] = useState<Status>('idle');
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+
+    if (!data.name?.trim() || !data.email?.trim() || !data.productionType) {
+      setStatus('error');
+      setError(t.errorRequired);
+      return;
+    }
+    if (!EMAIL_RE.test(data.email)) {
+      setStatus('error');
+      setError(t.errorEmail);
+      return;
+    }
+
+    setStatus('sending');
+    try {
+      const res = await fetch('/api/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, locale }),
+      });
+      if (!res.ok) throw new Error('Request failed');
+      setStatus('success');
+      form.reset();
+    } catch {
+      setStatus('error');
+      setError(t.errorGeneric);
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div
+        role="status"
+        aria-live="polite"
+        className="border-t border-ink pt-10"
+      >
+        <p className="text-lead tracking-tight max-w-lg">{t.success}</p>
+      </div>
+    );
+  }
+
+  const req = <span className="text-muted/70"> · {t.required}</span>;
+
+  return (
+    <form onSubmit={onSubmit} noValidate aria-describedby={error ? 'form-error' : undefined}>
+      <div className="grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2">
+        <Field id="name" label={<>{t.labels.name}{req}</>}>
+          <input id="name" name="name" type="text" autoComplete="name" required className={fieldClasses()} />
+        </Field>
+
+        <Field id="company" label={t.labels.company}>
+          <input id="company" name="company" type="text" autoComplete="organization" className={fieldClasses()} />
+        </Field>
+
+        <Field id="email" label={<>{t.labels.email}{req}</>}>
+          <input id="email" name="email" type="email" autoComplete="email" required className={fieldClasses()} />
+        </Field>
+
+        <Field id="phone" label={<>{t.labels.phone} <span className="text-muted/70">· {t.labels.phoneOptional}</span></>}>
+          <input id="phone" name="phone" type="tel" autoComplete="tel" className={fieldClasses()} />
+        </Field>
+
+        <Field id="productionType" label={<>{t.labels.productionType}{req}</>}>
+          <select id="productionType" name="productionType" required defaultValue="" className={fieldClasses() + ' appearance-none'}>
+            <option value="" disabled>{t.placeholders.select}</option>
+            {t.productionTypes.map((p) => (
+              <option key={p} value={p}>{p}</option>
+            ))}
+          </select>
+        </Field>
+
+        <Field id="shootDate" label={t.labels.shootDate}>
+          <input id="shootDate" name="shootDate" type="date" className={fieldClasses()} />
+        </Field>
+
+        <Field id="duration" label={t.labels.duration}>
+          <select id="duration" name="duration" defaultValue="" className={fieldClasses() + ' appearance-none'}>
+            <option value="" disabled>{t.placeholders.select}</option>
+            {t.durations.map((d) => (
+              <option key={d} value={d}>{d}</option>
+            ))}
+          </select>
+        </Field>
+
+        <Field id="crew" label={t.labels.crew}>
+          <input id="crew" name="crew" type="number" min={1} inputMode="numeric" placeholder={t.placeholders.crew} className={fieldClasses()} />
+        </Field>
+
+        <div className="sm:col-span-2">
+          <Field id="message" label={t.labels.message}>
+            <textarea id="message" name="message" rows={4} placeholder={t.placeholders.message} className={fieldClasses() + ' resize-none'} />
+          </Field>
+        </div>
+      </div>
+
+      {/* Honeypot — hidden from users, catches bots. Do not remove. */}
+      <div aria-hidden className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden" >
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
+      {error && (
+        <p id="form-error" role="alert" className="mt-8 text-eyebrow uppercase tracking-label text-ink">
+          {error}
+        </p>
+      )}
+
+      <div className="mt-12">
+        <button type="submit" className="btn w-full sm:w-auto" disabled={status === 'sending'}>
+          {status === 'sending' ? t.sending : t.submit}
+        </button>
+      </div>
+    </form>
+  );
+}
+
+function Field({
+  id,
+  label,
+  children,
+}: {
+  id: string;
+  label: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label htmlFor={id} className="block text-eyebrow uppercase tracking-label text-muted mb-3">
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}

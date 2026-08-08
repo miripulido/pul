@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ *
+ * PUL — base layer
+ * One typeface family. Restrained palette. Whitespace as structure.
+ * ------------------------------------------------------------------ */
+
+:root {
+  /* The single typeface stack for the entire site.
+     Swap this one line for a licensed grotesk (Neue Haas, Söhne, Aktiv)
+     loaded via next/font and the whole site follows. */
+  --font-sans: 'Helvetica Neue', 'Helvetica', 'Arial', system-ui, -apple-system,
+    'Segoe UI', Roboto, sans-serif;
+
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  ::selection {
+    @apply bg-ink text-paper;
+  }
+
+  /* Consistent, quiet focus ring for keyboard users only. */
+  :focus-visible {
+    outline: 1.5px solid var(--tw-ring-color, #141210);
+    outline-offset: 3px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  /* Page gutter + max width — the shared measure for every section. */
+  .wrap {
+    width: 100%;
+    max-width: theme('maxWidth.page');
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Small editorial label, e.g. "001 — MADRID, SPAIN". */
+  .eyebrow {
+    @apply text-eyebrow uppercase tracking-label text-muted;
+  }
+
+  /* Underline-on-hover text link, drawn with a pseudo-element so the
+     line animates from the left rather than snapping. */
+  .link {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+  .link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s theme('transitionTimingFunction.arch');
+  }
+  .link:hover::after,
+  .link:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Primary action — a precise rectangle, not a pill. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-3 whitespace-nowrap
+      border border-ink bg-ink text-paper uppercase tracking-label text-eyebrow
+      px-7 py-4 transition-colors duration-500 ease-arch;
+  }
+  .btn:hover {
+    @apply bg-transparent text-ink;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-3 whitespace-nowrap
+      border border-ink bg-transparent text-ink uppercase tracking-label text-eyebrow
+      px-7 py-4 transition-colors duration-500 ease-arch;
+  }
+  .btn-ghost:hover {
+    @apply bg-ink text-paper;
+  }
+
+  .hairline {
+    @apply border-0 border-t border-line;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Scroll reveal — set by IntersectionObserver (see Reveal.tsx).
+ * Elements start hidden; JS adds [data-shown]. If JS never runs, a
+ * <noscript> rule below keeps everything visible.
+ * ------------------------------------------------------------------ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.9s theme('transitionTimingFunction.arch'),
+    transform 0.9s theme('transitionTimingFunction.arch');
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+[data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
