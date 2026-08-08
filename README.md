@@ -4,6 +4,8 @@ Curated locations for creative production — advertising, film and photography.
 Marketing site built to read as a brand and a growing location portfolio, not a
 rental listing.
 
+**Live:** https://pul-website.vercel.app (auto-deploys from `main` via Vercel)
+
 > **PUL is a temporary working name.** To rebrand, change `brand.name` in
 > `src/content/site.ts`. Nothing else hard-codes the name.
 
