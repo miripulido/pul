@@ -93,17 +93,19 @@ export const locations: Location[] = [
     },
     hero: {
       ratio: '16/9',
-      src: null,
+      src: '/images/american-colonial/hero.jpg',
       alt: {
-        en: 'Exterior of an American colonial house in the Madrid light',
-        es: 'Exterior de una casa colonial americana bajo la luz de Madrid',
+        en: 'Wraparound porch of the American colonial house at golden hour',
+        es: 'Porche envolvente de la casa colonial americana al atardecer',
       },
     },
     gallery: [
-      { ratio: '3/2', src: null, alt: { en: 'Garden and exterior architecture', es: 'Jardín y arquitectura exterior' } },
-      { ratio: '4/5', src: null, alt: { en: 'Pool and terrace detail', es: 'Detalle de piscina y terraza' } },
-      { ratio: '4/5', src: null, alt: { en: 'Architectural facade detail', es: 'Detalle de fachada arquitectónica' } },
-      { ratio: '3/2', src: null, alt: { en: 'Terrace under natural light', es: 'Terraza bajo luz natural' } },
+      { ratio: '3/2', src: '/images/american-colonial/gallery-01.jpg', alt: { en: 'Aerial view of the facade and gable roofline', es: 'Vista aérea de la fachada y los tejados a dos aguas' } },
+      { ratio: '4/5', src: '/images/american-colonial/gallery-02.jpg', alt: { en: 'Porch entrance with gable and chimney detail', es: 'Entrada del porche con detalle de aguilón y chimenea' } },
+      { ratio: '4/5', src: '/images/american-colonial/gallery-03.jpg', alt: { en: 'Detail of black shutters and porch beams', es: 'Detalle de contraventanas negras y vigas del porche' } },
+      { ratio: '3/2', src: '/images/american-colonial/gallery-04.jpg', alt: { en: 'Rooftop and chimney architecture', es: 'Arquitectura de tejados y chimenea' } },
+      { ratio: '3/2', src: '/images/american-colonial/gallery-05.jpg', alt: { en: 'Garage detail', es: 'Detalle de garaje' } },
+      { ratio: '4/5', src: '/images/american-colonial/gallery-06.jpg', alt: { en: 'The house at dusk', es: 'La casa al anochecer' } },
     ],
     meta: {
       title: {
