@@ -22,9 +22,10 @@ export interface Media {
   src?: string | null;
   /**
    * 'image' (default) or 'video' — for future cinematic loops / hero footage.
-   * MediaFrame renders a muted, looping, autoplaying <video> when set, with
-   * no controls and no sound; drop a source in and set this flag, nothing
-   * else about the surrounding layout changes.
+   * Both MediaFrame and the homepage's ParallaxHero render a muted, looping,
+   * autoplaying <video> when set, with no controls and no sound; drop a
+   * source in and set this flag, nothing else about the surrounding layout
+   * changes.
    */
   type?: 'image' | 'video';
 }

@@ -14,14 +14,18 @@ interface ParallaxHeroProps {
 }
 
 /**
- * A single-use, tightly-scoped parallax image for the homepage hero.
+ * A single-use, tightly-scoped parallax hero for the homepage — image today,
+ * video-ready for whenever footage exists (`media.type: 'video'`; same
+ * muted/loop/autoplay/no-controls treatment as MediaFrame's video branch —
+ * set the flag and drop a source in, nothing else about this component
+ * needs to change).
  *
  * Deliberately separate from MediaFrame rather than adding this behaviour
  * there: MediaFrame is a server component used a dozen+ times per page, and
  * a scroll-linked transform needs client JS. Isolating it here keeps every
  * other image on the site server-rendered with zero added client weight.
  *
- * The image is rendered ~12% oversized inside the frame; scrolling
+ * The media is rendered ~12% oversized inside the frame; scrolling
  * translates it within that headroom, so the crop never reveals an edge.
  * Motion is capped at a few pixels — a hint of depth, not a scroll effect.
  */
@@ -63,6 +67,7 @@ export default function ParallaxHero({ media, locale, sizes = '100vw', priority,
   }, [media.src]);
 
   if (!media.src) return null;
+  const isVideo = media.type === 'video';
 
   return (
     <figure
@@ -70,14 +75,27 @@ export default function ParallaxHero({ media, locale, sizes = '100vw', priority,
       style={{ aspectRatio: media.ratio.replace('/', ' / ') }}
     >
       <div ref={trackRef} className="absolute inset-[-7%] will-change-transform">
-        <Image
-          src={media.src}
-          alt={media.alt[locale]}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className="object-cover"
-        />
+        {isVideo ? (
+          <video
+            src={media.src}
+            aria-label={media.alt[locale]}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <Image
+            src={media.src}
+            alt={media.alt[locale]}
+            fill
+            sizes={sizes}
+            priority={priority}
+            className="object-cover"
+          />
+        )}
       </div>
     </figure>
   );
