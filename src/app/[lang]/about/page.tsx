@@ -64,8 +64,9 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
         <Reveal as="h2" variant="fade" className="text-display font-medium tracking-tightest max-w-[14ch]">
           {dict.home.finalHeading}
         </Reveal>
-        <Link href={`${base}/enquire`} className="btn mt-10">
-          {dict.actions.requestAvailability} <span aria-hidden>→</span>
+        <Link href={`${base}/enquire`} className="group btn mt-10">
+          {dict.actions.requestAvailability}{' '}
+          <span aria-hidden className="inline-block transition-transform duration-standard ease-arch group-hover:translate-x-1">→</span>
         </Link>
       </section>
     </article>

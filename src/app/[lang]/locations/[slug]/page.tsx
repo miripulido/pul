@@ -8,6 +8,7 @@ import { availableLocations, getLocation, pricing } from '@/content/locations';
 import { site } from '@/content/site';
 import { formatPrice } from '@/lib/format';
 import Reveal from '@/components/Reveal';
+import WordReveal from '@/components/WordReveal';
 import MediaFrame from '@/components/MediaFrame';
 
 export function generateStaticParams() {
@@ -83,10 +84,14 @@ export default function LocationDetail({
         <span className="eyebrow">{location.place} · {site.coordinates}</span>
       </div>
 
-      <Reveal className="mt-12 flex items-baseline gap-6" variant="mask">
-        <span className="eyebrow">{location.number}</span>
-        <h1 className="text-h1 font-medium tracking-tightest leading-none">{location.title[locale]}</h1>
-      </Reveal>
+      <div className="mt-12 flex items-baseline gap-6">
+        <Reveal as="span" className="eyebrow">{location.number}</Reveal>
+        <WordReveal
+          as="h1"
+          text={location.title[locale]}
+          className="text-h1 font-medium tracking-tightest leading-none"
+        />
+      </div>
       <Reveal as="p" className="mt-6 text-lead tracking-tight max-w-2xl">
         {location.tagline[locale]}
       </Reveal>
@@ -187,8 +192,9 @@ export default function LocationDetail({
         <Reveal as="h2" variant="fade" className="text-display font-medium tracking-tightest max-w-[14ch]">
           {dict.home.finalHeading}
         </Reveal>
-        <Link href={`${base}/enquire?location=${location.slug}`} className="btn mt-10">
-          {dict.actions.requestAvailability} <span aria-hidden>→</span>
+        <Link href={`${base}/enquire?location=${location.slug}`} className="group btn mt-10">
+          {dict.actions.requestAvailability}{' '}
+          <span aria-hidden className="inline-block transition-transform duration-standard ease-arch group-hover:translate-x-1">→</span>
         </Link>
       </section>
     </article>

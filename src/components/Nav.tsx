@@ -13,9 +13,10 @@ interface NavProps {
   dict: Dictionary;
 }
 
-// Mobile menu transition duration — kept in one place so the JS unmount
-// delay and the CSS transition can never drift out of sync.
-const MENU_TRANSITION_MS = 400;
+// Mobile menu transition duration — the "standard" motion tier (500ms, see
+// tailwind.config.ts). Kept in one place so the JS unmount delay and the
+// CSS transition can never drift out of sync.
+const MENU_TRANSITION_MS = 500;
 
 export default function Nav({ locale, dict }: NavProps) {
   const [open, setOpen] = useState(false);
@@ -56,6 +57,7 @@ export default function Nav({ locale, dict }: NavProps) {
       <nav className="wrap flex items-center justify-between h-16 sm:h-20" aria-label="Primary">
         <Link
           href={base}
+          data-intro=""
           className="text-xl sm:text-2xl font-medium tracking-tighter leading-none"
           aria-label={`${site.brand.name} — home`}
         >
@@ -63,7 +65,11 @@ export default function Nav({ locale, dict }: NavProps) {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-8 lg:gap-12">
+        <div
+          data-intro=""
+          style={{ '--intro-delay': '120ms' } as React.CSSProperties}
+          className="hidden md:flex items-center gap-8 lg:gap-12"
+        >
           <ul className="flex items-center gap-8 lg:gap-10 text-eyebrow uppercase tracking-label">
             {links.map((l) => (
               <li key={l.href}>
@@ -91,7 +97,9 @@ export default function Nav({ locale, dict }: NavProps) {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden text-eyebrow uppercase tracking-label transition-colors duration-300 hover:text-muted"
+          data-intro=""
+          style={{ '--intro-delay': '80ms' } as React.CSSProperties}
+          className="md:hidden text-eyebrow uppercase tracking-label transition-colors duration-fast hover:text-muted"
           aria-expanded={open}
           aria-controls="mobile-menu"
         >
@@ -116,7 +124,7 @@ export default function Nav({ locale, dict }: NavProps) {
       <div
         id="mobile-menu"
         {...(!open ? ({ inert: '' } as Record<string, string>) : {})}
-        className={`md:hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-paper flex flex-col justify-between transition-all duration-[400ms] ease-arch ${
+        className={`md:hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-paper flex flex-col justify-between transition-all duration-standard ease-arch ${
           open ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >

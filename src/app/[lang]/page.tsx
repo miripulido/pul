@@ -6,6 +6,7 @@ import { availableLocations, comingSoonLocations, pricing } from '@/content/loca
 import { site } from '@/content/site';
 import { formatPrice } from '@/lib/format';
 import Reveal from '@/components/Reveal';
+import WordReveal from '@/components/WordReveal';
 import MediaFrame from '@/components/MediaFrame';
 import ParallaxHero from '@/components/ParallaxHero';
 import LocationCard from '@/components/LocationCard';
@@ -18,20 +19,27 @@ export default function Home({ params }: { params: { lang: string } }) {
 
   return (
     <>
-      {/* ---------------------------------------------------------------- HERO */}
+      {/* ---------------------------------------------------------------- HERO
+          Entrance is choreographed, not simultaneous: wordmark/nav (see
+          Nav.tsx) settle first, then this eyebrow row, then the headline,
+          then the hero image — each beat later than the last. */}
       <section className="wrap pt-16 sm:pt-24">
-        <div className="flex items-baseline justify-between">
+        <div
+          data-intro=""
+          style={{ '--intro-delay': '180ms' } as React.CSSProperties}
+          className="flex items-baseline justify-between"
+        >
           <span className="eyebrow">{site.brand.name} — 001</span>
           <span className="eyebrow">
             {site.location} · {site.coordinates}
           </span>
         </div>
-        <Reveal as="h1" variant="fade" className="mt-8 sm:mt-12 text-display font-medium text-ink max-w-[16ch]">
+        <Reveal as="h1" variant="fade" delay={300} className="mt-8 sm:mt-12 text-display font-medium text-ink max-w-[16ch]">
           {dict.home.heroTagline}
         </Reveal>
       </section>
 
-      <Reveal className="wrap mt-12 sm:mt-16" variant="mask">
+      <Reveal className="wrap mt-12 sm:mt-16" variant="mask" delay={480}>
         {featured.hero && (
           <ParallaxHero media={featured.hero} locale={locale} priority sizes="(min-width: 1600px) 1600px, 100vw" />
         )}
@@ -57,19 +65,22 @@ export default function Home({ params }: { params: { lang: string } }) {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-12 md:items-end">
-          <Reveal className="md:col-span-7" variant="mask">
-            <h2 className="text-h1 font-medium tracking-tightest leading-none">
-              {featured.title[locale]}
-            </h2>
-            <p className="mt-4 text-muted">{featured.place}</p>
-          </Reveal>
+          <div className="md:col-span-7">
+            <WordReveal
+              as="h2"
+              text={featured.title[locale]}
+              className="text-h1 font-medium tracking-tightest leading-none"
+            />
+            <Reveal as="p" delay={120} className="mt-4 text-muted">{featured.place}</Reveal>
+          </div>
           <Reveal className="md:col-span-5" delay={80}>
             <p className="text-lead tracking-tight">{featured.tagline[locale]}</p>
             {featured.description && (
               <p className="mt-5 text-muted max-w-md">{featured.description[locale]}</p>
             )}
-            <Link href={`${base}/locations/${featured.slug}`} className="link mt-7 inline-flex items-center gap-3 text-eyebrow uppercase tracking-label">
-              {dict.actions.viewLocation} <span aria-hidden>→</span>
+            <Link href={`${base}/locations/${featured.slug}`} className="group link mt-7 inline-flex items-center gap-3 text-eyebrow uppercase tracking-label">
+              {dict.actions.viewLocation}{' '}
+              <span aria-hidden className="inline-block transition-transform duration-standard ease-arch group-hover:translate-x-1">→</span>
             </Link>
           </Reveal>
         </div>
@@ -169,8 +180,10 @@ export default function Home({ params }: { params: { lang: string } }) {
           {dict.home.moreBody}
         </Reveal>
         <div className="mt-12 grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2">
-          {comingSoonLocations.map((loc) => (
-            <LocationCard key={loc.slug} location={loc} locale={locale} dict={dict} />
+          {comingSoonLocations.map((loc, i) => (
+            <Reveal key={loc.slug} delay={i * 100}>
+              <LocationCard location={loc} locale={locale} dict={dict} />
+            </Reveal>
           ))}
         </div>
       </section>
@@ -181,8 +194,9 @@ export default function Home({ params }: { params: { lang: string } }) {
           <Reveal as="h2" variant="fade" className="text-display font-medium tracking-tightest max-w-[14ch]">
             {dict.home.finalHeading}
           </Reveal>
-          <Link href={`${base}/enquire`} className="btn mt-10">
-            {dict.actions.requestAvailability} <span aria-hidden>→</span>
+          <Link href={`${base}/enquire`} className="group btn mt-10">
+            {dict.actions.requestAvailability}{' '}
+            <span aria-hidden className="inline-block transition-transform duration-standard ease-arch group-hover:translate-x-1">→</span>
           </Link>
         </div>
       </section>

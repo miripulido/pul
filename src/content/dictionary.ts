@@ -19,6 +19,8 @@ export interface Dictionary {
     enquire: string;
     requestAvailability: string;
     viewLocation: string;
+    /** Short form for tight spaces — a cursor badge, not a link label. */
+    view: string;
     allLocations: string;
     back: string;
   };
@@ -133,6 +135,7 @@ const en: Dictionary = {
     enquire: 'Enquire',
     requestAvailability: 'Request availability',
     viewLocation: 'View location',
+    view: 'View',
     allLocations: 'All locations',
     back: 'Back',
   },
@@ -278,6 +281,7 @@ const es: Dictionary = {
     enquire: 'Consultar',
     requestAvailability: 'Solicitar disponibilidad',
     viewLocation: 'Ver localización',
+    view: 'Ver',
     allLocations: 'Todas las localizaciones',
     back: 'Volver',
   },

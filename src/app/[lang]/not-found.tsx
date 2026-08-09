@@ -8,8 +8,8 @@ export default function NotFound() {
       <h1 className="mt-6 text-h1 font-medium tracking-tightest max-w-[14ch]">
         This page could not be found.
       </h1>
-      <Link href="/" className="btn mt-10">
-        Home <span aria-hidden>→</span>
+      <Link href="/" className="group btn mt-10">
+        Home <span aria-hidden className="inline-block transition-transform duration-standard ease-arch group-hover:translate-x-1">→</span>
       </Link>
     </div>
   );

@@ -46,6 +46,16 @@ const config: Config = {
         // One architectural easing curve, used everywhere.
         arch: 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
+      transitionDuration: {
+        // The motion system's three tiers. Pick by what's moving, not by
+        // feel in the moment — micro-interactions read as fast, structural
+        // UI (menus, cards, buttons) as standard, editorial/image reveals
+        // as slow. Arbitrary values (duration-[Nms]) remain available for
+        // the rare case that's paired with a JS timer and can't drift.
+        fast: '300ms', // hover colour/underline, small state changes
+        standard: '500ms', // card lift, arrow nudge, menu/panel transitions
+        slow: '900ms', // scroll reveals, image entrances, headline reveals
+      },
       keyframes: {
         reveal: {
           from: { opacity: '0', transform: 'translateY(14px)' },

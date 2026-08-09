@@ -34,7 +34,7 @@ export default function LanguageSwitcher({ current }: { current: Locale }) {
               hrefLang={locale}
               aria-current={active ? 'true' : undefined}
               className={
-                'transition-colors duration-300 ' +
+                'transition-colors duration-fast ' +
                 (active ? 'text-ink' : 'text-muted hover:text-ink')
               }
             >

@@ -68,23 +68,23 @@ export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Di
   return (
     <form onSubmit={onSubmit} noValidate aria-describedby={error ? 'form-error' : undefined}>
       <div className="grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2">
-        <Field id="name" label={<>{t.labels.name}{req}</>}>
+        <Field id="name" delay={0} label={<>{t.labels.name}{req}</>}>
           <input id="name" name="name" type="text" autoComplete="name" required className={fieldClasses()} />
         </Field>
 
-        <Field id="company" label={t.labels.company}>
+        <Field id="company" delay={40} label={t.labels.company}>
           <input id="company" name="company" type="text" autoComplete="organization" className={fieldClasses()} />
         </Field>
 
-        <Field id="email" label={<>{t.labels.email}{req}</>}>
+        <Field id="email" delay={80} label={<>{t.labels.email}{req}</>}>
           <input id="email" name="email" type="email" autoComplete="email" required className={fieldClasses()} />
         </Field>
 
-        <Field id="phone" label={<>{t.labels.phone} <span className="text-muted/70">· {t.labels.phoneOptional}</span></>}>
+        <Field id="phone" delay={120} label={<>{t.labels.phone} <span className="text-muted/70">· {t.labels.phoneOptional}</span></>}>
           <input id="phone" name="phone" type="tel" autoComplete="tel" className={fieldClasses()} />
         </Field>
 
-        <Field id="productionType" label={<>{t.labels.productionType}{req}</>}>
+        <Field id="productionType" delay={160} label={<>{t.labels.productionType}{req}</>}>
           <select id="productionType" name="productionType" required defaultValue="" className={fieldClasses() + ' appearance-none'}>
             <option value="" disabled>{t.placeholders.select}</option>
             {t.productionTypes.map((p) => (
@@ -93,11 +93,11 @@ export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Di
           </select>
         </Field>
 
-        <Field id="shootDate" label={t.labels.shootDate}>
+        <Field id="shootDate" delay={200} label={t.labels.shootDate}>
           <input id="shootDate" name="shootDate" type="date" className={fieldClasses()} />
         </Field>
 
-        <Field id="duration" label={t.labels.duration}>
+        <Field id="duration" delay={240} label={t.labels.duration}>
           <select id="duration" name="duration" defaultValue="" className={fieldClasses() + ' appearance-none'}>
             <option value="" disabled>{t.placeholders.select}</option>
             {t.durations.map((d) => (
@@ -106,12 +106,12 @@ export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Di
           </select>
         </Field>
 
-        <Field id="crew" label={t.labels.crew}>
+        <Field id="crew" delay={280} label={t.labels.crew}>
           <input id="crew" name="crew" type="number" min={1} inputMode="numeric" placeholder={t.placeholders.crew} className={fieldClasses()} />
         </Field>
 
         <div className="sm:col-span-2">
-          <Field id="message" label={t.labels.message}>
+          <Field id="message" delay={320} label={t.labels.message}>
             <textarea id="message" name="message" rows={4} placeholder={t.placeholders.message} className={fieldClasses() + ' resize-none'} />
           </Field>
         </div>
@@ -132,7 +132,7 @@ export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Di
       <div className="mt-12">
         <button
           type="submit"
-          className="btn w-full transition-opacity duration-300 sm:w-auto disabled:opacity-50"
+          className="btn w-full transition-opacity duration-fast sm:w-auto disabled:opacity-50"
           disabled={status === 'sending'}
         >
           {status === 'sending' ? t.sending : t.submit}
@@ -146,16 +146,19 @@ function Field({
   id,
   label,
   children,
+  delay = 0,
 }: {
   id: string;
   label: React.ReactNode;
   children: React.ReactNode;
+  /** Staggers this field's entrance, ms — small and fast, not a scroll reveal. */
+  delay?: number;
 }) {
   return (
-    <div className="group">
+    <div className="group enter-rise" style={{ animationDelay: `${delay}ms` }}>
       <label
         htmlFor={id}
-        className="block text-eyebrow uppercase tracking-label text-muted mb-3 transition-colors duration-300 ease-arch group-focus-within:text-ink"
+        className="block text-eyebrow uppercase tracking-label text-muted mb-3 transition-colors duration-fast ease-arch group-focus-within:text-ink"
       >
         {label}
       </label>
