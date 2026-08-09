@@ -61,7 +61,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
       </section>
 
       <section className="mt-28 sm:mt-40 border-t border-ink pt-12">
-        <Reveal as="h2" className="text-display font-medium tracking-tightest max-w-[14ch]">
+        <Reveal as="h2" variant="fade" className="text-display font-medium tracking-tightest max-w-[14ch]">
           {dict.home.finalHeading}
         </Reveal>
         <Link href={`${base}/enquire`} className="btn mt-10">

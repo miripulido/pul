@@ -13,8 +13,15 @@ interface NavProps {
   dict: Dictionary;
 }
 
+// Mobile menu transition duration — kept in one place so the JS unmount
+// delay and the CSS transition can never drift out of sync.
+const MENU_TRANSITION_MS = 400;
+
 export default function Nav({ locale, dict }: NavProps) {
   const [open, setOpen] = useState(false);
+  // Stays true slightly after `open` goes false, so the panel can play its
+  // exit transition before being removed from the DOM (and the a11y tree).
+  const [rendered, setRendered] = useState(false);
   const pathname = usePathname();
   const base = `/${locale}`;
 
@@ -31,6 +38,14 @@ export default function Nav({ locale, dict }: NavProps) {
     return () => {
       document.body.style.overflow = '';
     };
+  }, [open]);
+  useEffect(() => {
+    if (open) {
+      setRendered(true);
+      return;
+    }
+    const timeout = setTimeout(() => setRendered(false), MENU_TRANSITION_MS);
+    return () => clearTimeout(timeout);
   }, [open]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
@@ -76,7 +91,7 @@ export default function Nav({ locale, dict }: NavProps) {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden text-eyebrow uppercase tracking-label"
+          className="md:hidden text-eyebrow uppercase tracking-label transition-colors duration-300 hover:text-muted"
           aria-expanded={open}
           aria-controls="mobile-menu"
         >
@@ -93,29 +108,37 @@ export default function Nav({ locale, dict }: NavProps) {
         Visibility is driven by Tailwind display classes, not the native
         `hidden` attribute — an unconditional `flex` utility has the same
         specificity as the UA `[hidden]` rule and, being an author style,
-        always wins the cascade. */}
-    <div
-      id="mobile-menu"
-      className={`${open ? 'flex' : 'hidden'} md:hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-paper flex-col justify-between`}
-    >
-      <ul className="wrap flex flex-col gap-2 pt-10">
-        {[...links, { href: `${base}/enquire`, label: dict.nav.enquire }].map((l) => (
-          <li key={l.href}>
-            <Link
-              href={l.href}
-              className="block py-3 text-h2 tracking-tighter"
-              aria-current={isActive(l.href) ? 'page' : undefined}
-            >
-              {l.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div className="wrap flex items-center justify-between py-8 border-t border-line">
-        <span className="eyebrow">{site.location}</span>
-        <LanguageSwitcher current={locale} />
+        always wins the cascade.
+        Stays mounted for MENU_TRANSITION_MS after closing so the fade/rise
+        exit can play; `inert` drops it from focus and the a11y tree the
+        instant it starts closing, well before it actually unmounts. */}
+    {rendered && (
+      <div
+        id="mobile-menu"
+        {...(!open ? ({ inert: '' } as Record<string, string>) : {})}
+        className={`md:hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-paper flex flex-col justify-between transition-all duration-[400ms] ease-arch ${
+          open ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+        }`}
+      >
+        <ul className="wrap flex flex-col gap-2 pt-10">
+          {[...links, { href: `${base}/enquire`, label: dict.nav.enquire }].map((l) => (
+            <li key={l.href}>
+              <Link
+                href={l.href}
+                className="block py-3 text-h2 tracking-tighter"
+                aria-current={isActive(l.href) ? 'page' : undefined}
+              >
+                {l.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="wrap flex items-center justify-between py-8 border-t border-line">
+          <span className="eyebrow">{site.location}</span>
+          <LanguageSwitcher current={locale} />
+        </div>
       </div>
-    </div>
+    )}
     </>
   );
 }

@@ -6,6 +6,7 @@ import { getDictionary } from '@/content/dictionary';
 import { site } from '@/content/site';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import PageTransition from '@/components/PageTransition';
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -75,7 +76,7 @@ export default function LangLayout({
         </a>
         <Nav locale={locale} dict={dict} />
         <main id="main" className="flex-1">
-          {children}
+          <PageTransition>{children}</PageTransition>
         </main>
         <Footer locale={locale} dict={dict} />
       </body>

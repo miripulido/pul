@@ -109,12 +109,32 @@
   .hairline {
     @apply border-0 border-t border-line;
   }
+
+  /* Plays once on mount — for content that appears in place (form success/
+     error states, page-level entrances) rather than scrolling into view,
+     so the IntersectionObserver-driven [data-reveal] hooks don't apply. */
+  .enter-rise {
+    animation: enter-rise 0.7s theme('transitionTimingFunction.arch') both;
+  }
+}
+
+@keyframes enter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ------------------------------------------------------------------ *
  * Scroll reveal — set by IntersectionObserver (see Reveal.tsx).
- * Elements start hidden; JS adds [data-shown]. If JS never runs, a
- * <noscript> rule below keeps everything visible.
+ * Elements start hidden; JS adds [data-shown]. Three variants share one
+ * motion language (same easing, same family of durations) but read
+ * differently: rise for body copy, mask for hero imagery/headlines,
+ * fade for very large display type that shouldn't slide.
  * ------------------------------------------------------------------ */
 [data-reveal] {
   opacity: 0;
@@ -130,13 +150,41 @@
   transform: none;
 }
 
+/* Curtain-style reveal for hero imagery and considered headline entrances. */
+[data-reveal-mask] {
+  clip-path: inset(0 0 100% 0);
+  transform: scale(1.045);
+  transition:
+    clip-path 1.15s theme('transitionTimingFunction.arch'),
+    transform 1.15s theme('transitionTimingFunction.arch');
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: clip-path, transform;
+}
+[data-reveal-mask][data-shown] {
+  clip-path: inset(0 0 0% 0);
+  transform: scale(1);
+}
+
+/* Opacity-only — for large display type where a slide reads as fussy. */
+[data-reveal-fade] {
+  opacity: 0;
+  transition: opacity 1.1s theme('transitionTimingFunction.arch');
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal-fade][data-shown] {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  [data-reveal] {
+  [data-reveal],
+  [data-reveal-mask],
+  [data-reveal-fade] {
     opacity: 1 !important;
     transform: none !important;
+    clip-path: none !important;
     transition: none !important;
   }
   *,

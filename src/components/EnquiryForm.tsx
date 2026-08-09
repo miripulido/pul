@@ -56,7 +56,7 @@ export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Di
       <div
         role="status"
         aria-live="polite"
-        className="border-t border-ink pt-10"
+        className="enter-rise border-t border-ink pt-10"
       >
         <p className="text-lead tracking-tight max-w-lg">{t.success}</p>
       </div>
@@ -124,13 +124,17 @@ export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Di
       </div>
 
       {error && (
-        <p id="form-error" role="alert" className="mt-8 text-eyebrow uppercase tracking-label text-ink">
+        <p id="form-error" role="alert" className="enter-rise mt-8 text-eyebrow uppercase tracking-label text-ink">
           {error}
         </p>
       )}
 
       <div className="mt-12">
-        <button type="submit" className="btn w-full sm:w-auto" disabled={status === 'sending'}>
+        <button
+          type="submit"
+          className="btn w-full transition-opacity duration-300 sm:w-auto disabled:opacity-50"
+          disabled={status === 'sending'}
+        >
           {status === 'sending' ? t.sending : t.submit}
         </button>
       </div>
@@ -148,8 +152,11 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <label htmlFor={id} className="block text-eyebrow uppercase tracking-label text-muted mb-3">
+    <div className="group">
+      <label
+        htmlFor={id}
+        className="block text-eyebrow uppercase tracking-label text-muted mb-3 transition-colors duration-300 ease-arch group-focus-within:text-ink"
+      >
         {label}
       </label>
       {children}

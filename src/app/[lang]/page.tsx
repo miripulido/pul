@@ -7,6 +7,7 @@ import { site } from '@/content/site';
 import { formatPrice } from '@/lib/format';
 import Reveal from '@/components/Reveal';
 import MediaFrame from '@/components/MediaFrame';
+import ParallaxHero from '@/components/ParallaxHero';
 import LocationCard from '@/components/LocationCard';
 
 export default function Home({ params }: { params: { lang: string } }) {
@@ -25,14 +26,14 @@ export default function Home({ params }: { params: { lang: string } }) {
             {site.location} · {site.coordinates}
           </span>
         </div>
-        <Reveal as="h1" className="mt-8 sm:mt-12 text-display font-medium text-ink max-w-[16ch]">
+        <Reveal as="h1" variant="fade" className="mt-8 sm:mt-12 text-display font-medium text-ink max-w-[16ch]">
           {dict.home.heroTagline}
         </Reveal>
       </section>
 
-      <Reveal className="wrap mt-12 sm:mt-16">
+      <Reveal className="wrap mt-12 sm:mt-16" variant="mask">
         {featured.hero && (
-          <MediaFrame media={featured.hero} locale={locale} priority sizes="(min-width: 1600px) 1600px, 100vw" />
+          <ParallaxHero media={featured.hero} locale={locale} priority sizes="(min-width: 1600px) 1600px, 100vw" />
         )}
       </Reveal>
 
@@ -56,7 +57,7 @@ export default function Home({ params }: { params: { lang: string } }) {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-12 md:items-end">
-          <Reveal className="md:col-span-7">
+          <Reveal className="md:col-span-7" variant="mask">
             <h2 className="text-h1 font-medium tracking-tightest leading-none">
               {featured.title[locale]}
             </h2>
@@ -76,7 +77,7 @@ export default function Home({ params }: { params: { lang: string } }) {
         {/* Visual sequence — art-directed, uneven grid with room to breathe. */}
         {featured.gallery && featured.gallery.length >= 4 && (
           <div className="mt-16 sm:mt-24 grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-12">
-            <Reveal className="md:col-span-7 md:col-start-1">
+            <Reveal className="md:col-span-7 md:col-start-1" variant="mask">
               <MediaFrame media={featured.gallery[0]} locale={locale} sizes="(min-width: 768px) 58vw, 100vw" />
             </Reveal>
             <Reveal className="md:col-span-4 md:col-start-9 md:mt-24" delay={80}>
@@ -177,7 +178,7 @@ export default function Home({ params }: { params: { lang: string } }) {
       {/* ------------------------------------------------------------ FINAL CTA */}
       <section className="wrap mt-28 sm:mt-48">
         <div className="border-t border-ink pt-12 sm:pt-16">
-          <Reveal as="h2" className="text-display font-medium tracking-tightest max-w-[14ch]">
+          <Reveal as="h2" variant="fade" className="text-display font-medium tracking-tightest max-w-[14ch]">
             {dict.home.finalHeading}
           </Reveal>
           <Link href={`${base}/enquire`} className="btn mt-10">

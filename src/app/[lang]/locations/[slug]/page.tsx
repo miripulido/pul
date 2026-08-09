@@ -83,17 +83,17 @@ export default function LocationDetail({
         <span className="eyebrow">{location.place} · {site.coordinates}</span>
       </div>
 
-      <div className="mt-12 flex items-baseline gap-6">
+      <Reveal className="mt-12 flex items-baseline gap-6" variant="mask">
         <span className="eyebrow">{location.number}</span>
         <h1 className="text-h1 font-medium tracking-tightest leading-none">{location.title[locale]}</h1>
-      </div>
+      </Reveal>
       <Reveal as="p" className="mt-6 text-lead tracking-tight max-w-2xl">
         {location.tagline[locale]}
       </Reveal>
 
       {/* Hero */}
       {location.hero && (
-        <Reveal className="mt-12">
+        <Reveal className="mt-12" variant="mask">
           <MediaFrame media={location.hero} locale={locale} priority sizes="(min-width: 1600px) 1600px, 100vw" />
         </Reveal>
       )}
@@ -124,7 +124,12 @@ export default function LocationDetail({
               'md:col-span-6 md:col-start-7 md:mt-8',
             ];
             return (
-              <Reveal key={i} delay={(i % 2) * 60} className={layout[i % layout.length]}>
+              <Reveal
+                key={i}
+                delay={(i % 2) * 60}
+                variant={i === 0 ? 'mask' : 'rise'}
+                className={layout[i % layout.length]}
+              >
                 <MediaFrame media={m} locale={locale} sizes="(min-width: 768px) 50vw, 100vw" />
               </Reveal>
             );
@@ -138,8 +143,10 @@ export default function LocationDetail({
           <div>
             <div className="border-t border-line pt-6"><span className="eyebrow">{dict.location.features}</span></div>
             <ul className="mt-6">
-              {location.features[locale].map((f) => (
-                <li key={f} className="border-b border-line py-5 text-h2 tracking-tighter">{f}</li>
+              {location.features[locale].map((f, i) => (
+                <Reveal as="li" key={f} delay={i * 40} className="border-b border-line py-5 text-h2 tracking-tighter">
+                  {f}
+                </Reveal>
               ))}
             </ul>
           </div>
@@ -177,7 +184,7 @@ export default function LocationDetail({
 
       {/* CTA */}
       <section className="mt-24 sm:mt-40 border-t border-ink pt-12">
-        <Reveal as="h2" className="text-display font-medium tracking-tightest max-w-[14ch]">
+        <Reveal as="h2" variant="fade" className="text-display font-medium tracking-tightest max-w-[14ch]">
           {dict.home.finalHeading}
         </Reveal>
         <Link href={`${base}/enquire?location=${location.slug}`} className="btn mt-10">

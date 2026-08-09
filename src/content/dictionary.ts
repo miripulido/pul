@@ -168,7 +168,7 @@ const en: Dictionary = {
     fullNote: 'Included hours confirmed on booking',
     overtime: 'Additional hours quoted separately',
     interiors: 'Interiors available upon request',
-    quoteNote: 'Rates are for the American Colonial location. Enquire for a tailored quote.',
+    quoteNote: 'Rates are for The American House. Enquire for a tailored quote.',
     from: 'Rates from',
   },
   location: {
@@ -248,7 +248,7 @@ const en: Dictionary = {
   meta: {
     homeTitle: 'PUL — Locations for creative production in Madrid',
     homeDescription:
-      'Curated production locations in Madrid for advertising, film and photography. An American colonial house for campaigns, film and stills. Rates from €1,200.',
+      'Curated production locations in Madrid for advertising, film and photography. An American house for campaigns, film and stills. Rates from €1,200.',
     aboutTitle: 'About — PUL',
     aboutDescription:
       'PUL is a curated collection of shooting locations in Madrid for advertising, film and photography.',
@@ -313,7 +313,7 @@ const es: Dictionary = {
     fullNote: 'Horas incluidas confirmadas en la reserva',
     overtime: 'Horas adicionales presupuestadas por separado',
     interiors: 'Interiores disponibles bajo petición',
-    quoteNote: 'Tarifas para la localización American Colonial. Consulta para un presupuesto a medida.',
+    quoteNote: 'Tarifas para The American House. Consulta para un presupuesto a medida.',
     from: 'Tarifas desde',
   },
   location: {
@@ -393,7 +393,7 @@ const es: Dictionary = {
   meta: {
     homeTitle: 'PUL — Localizaciones para producción creativa en Madrid',
     homeDescription:
-      'Localizaciones de producción en Madrid para publicidad, cine y fotografía. Una casa colonial americana para campañas, cine y foto fija. Tarifas desde 1.200 €.',
+      'Localizaciones de producción en Madrid para publicidad, cine y fotografía. Una casa americana para campañas, cine y foto fija. Tarifas desde 1.200 €.',
     aboutTitle: 'Estudio — PUL',
     aboutDescription:
       'PUL es una colección de localizaciones de rodaje en Madrid para publicidad, cine y fotografía.',

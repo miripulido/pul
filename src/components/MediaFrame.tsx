@@ -15,14 +15,16 @@ interface MediaFrameProps {
 }
 
 /**
- * The single image primitive for the site.
+ * The single media primitive for the site.
  *
- * When `media.src` is set, it renders a responsive, lazy next/image inside a
- * fixed-ratio frame. When it is null (no photography supplied yet), it renders
- * a considered, labelled placeholder — a flat neutral frame marked with its
- * aspect ratio — so layouts are complete and art-directed rather than broken.
- * Drop a real path into the location data and the same frame fills with the
- * photograph, no layout change.
+ * When `media.src` is set, it renders a responsive, lazy next/image (or, for
+ * `type: 'video'`, a muted/looping/autoplaying <video> — no controls, no
+ * sound, ready for future cinematic loops) inside a fixed-ratio frame. When
+ * `src` is null, it renders a considered, labelled placeholder — a flat
+ * neutral frame marked with its aspect ratio — so layouts are complete and
+ * art-directed rather than broken. Drop a real path into the location data
+ * (and set `type: 'video'` if it's footage) and the same frame fills with
+ * the media, no layout change.
  */
 export default function MediaFrame({
   media,
@@ -33,6 +35,7 @@ export default function MediaFrame({
   className,
 }: MediaFrameProps) {
   const alt = media.alt[locale];
+  const isVideo = media.type === 'video';
 
   return (
     <figure
@@ -40,17 +43,33 @@ export default function MediaFrame({
       style={{ aspectRatio: media.ratio.replace('/', ' / ') }}
     >
       {media.src ? (
-        <Image
-          src={media.src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className={
-            'object-cover transition-transform duration-[900ms] ease-arch ' +
-            (hover ? 'group-hover:scale-[1.03]' : '')
-          }
-        />
+        isVideo ? (
+          <video
+            src={media.src}
+            aria-label={alt}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className={
+              'absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-arch ' +
+              (hover ? 'group-hover:scale-[1.03]' : '')
+            }
+          />
+        ) : (
+          <Image
+            src={media.src}
+            alt={alt}
+            fill
+            sizes={sizes}
+            priority={priority}
+            className={
+              'object-cover transition-transform duration-[900ms] ease-arch ' +
+              (hover ? 'group-hover:scale-[1.03]' : '')
+            }
+          />
+        )
       ) : (
         <div
           role="img"
@@ -58,7 +77,9 @@ export default function MediaFrame({
           className="absolute inset-0 flex items-end justify-between p-4 sm:p-6"
         >
           {/* Discreet frame markers — reads as intentional, not unfinished. */}
-          <span className="text-eyebrow uppercase tracking-label text-muted/70">Image</span>
+          <span className="text-eyebrow uppercase tracking-label text-muted/70">
+            {isVideo ? 'Video' : 'Image'}
+          </span>
           <span className="text-eyebrow uppercase tracking-label text-muted/70">
             {media.ratio.replace('/', ':')}
           </span>
