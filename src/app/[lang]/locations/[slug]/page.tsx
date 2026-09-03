@@ -44,6 +44,16 @@ export function generateMetadata({
       description: location.meta.description[locale],
       url: path,
     },
+    // Metadata merges with the root layout's, so any field left unset here
+    // (this one was) silently inherits the layout's site-wide default —
+    // which meant every location page's Twitter card showed the homepage's
+    // title/description instead of its own. Every field that varies by page
+    // needs to be set explicitly at the page level.
+    twitter: {
+      card: 'summary_large_image',
+      title: location.meta.title[locale],
+      description: location.meta.description[locale],
+    },
   };
 }
 

@@ -2,14 +2,13 @@ import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
 import { isLocale } from '@/lib/i18n';
 import { getDictionary } from '@/content/dictionary';
-import { availableLocations, comingSoonLocations, pricing } from '@/content/locations';
+import { availableLocations, pricing } from '@/content/locations';
 import { site } from '@/content/site';
 import { formatPrice } from '@/lib/format';
 import Reveal from '@/components/Reveal';
 import WordReveal from '@/components/WordReveal';
 import MediaFrame from '@/components/MediaFrame';
 import ParallaxHero from '@/components/ParallaxHero';
-import LocationCard from '@/components/LocationCard';
 
 export default function Home({ params }: { params: { lang: string } }) {
   const locale: Locale = isLocale(params.lang) ? params.lang : 'en';
@@ -167,24 +166,6 @@ export default function Home({ params }: { params: { lang: string } }) {
               {dict.nav.rates} →
             </Link>
           </Reveal>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------- MORE LOCATIONS */}
-      <section className="wrap mt-28 sm:mt-40">
-        <div className="border-t border-line pt-6 flex items-baseline justify-between">
-          <span className="eyebrow">{dict.home.moreTitle}</span>
-          <span className="eyebrow text-muted/70">{dict.home.moreComing}</span>
-        </div>
-        <Reveal as="p" className="mt-8 max-w-2xl text-lead tracking-tight text-muted">
-          {dict.home.moreBody}
-        </Reveal>
-        <div className="mt-12 grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2">
-          {comingSoonLocations.map((loc, i) => (
-            <Reveal key={loc.slug} delay={i * 100}>
-              <LocationCard location={loc} locale={locale} dict={dict} />
-            </Reveal>
-          ))}
         </div>
       </section>
 

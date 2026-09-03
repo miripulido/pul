@@ -126,26 +126,9 @@ export const locations: Location[] = [
       },
     },
   },
-  {
-    number: '002',
-    slug: 'coming-soon-002',
-    status: 'coming-soon',
-    place: 'Location to be announced',
-    title: { en: 'Coming soon', es: 'Próximamente' },
-    tagline: { en: 'In selection.', es: 'En selección.' },
-  },
-  {
-    number: '003',
-    slug: 'coming-soon-003',
-    status: 'coming-soon',
-    place: 'Location to be announced',
-    title: { en: 'Coming soon', es: 'Próximamente' },
-    tagline: { en: 'In selection.', es: 'En selección.' },
-  },
 ];
 
 export const availableLocations = locations.filter((l) => l.status === 'available');
-export const comingSoonLocations = locations.filter((l) => l.status === 'coming-soon');
 
 export function getLocation(slug: string): Location | undefined {
   return locations.find((l) => l.slug === slug);

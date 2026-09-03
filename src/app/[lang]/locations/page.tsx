@@ -15,6 +15,7 @@ export function generateMetadata({ params }: { params: { lang: string } }): Meta
     description: dict.meta.locationsDescription,
     alternates: { canonical: `/${locale}/locations`, languages: { en: '/en/locations', es: '/es/locations' } },
     openGraph: { title: dict.meta.locationsTitle, description: dict.meta.locationsDescription, url: `/${locale}/locations` },
+    twitter: { card: 'summary_large_image', title: dict.meta.locationsTitle, description: dict.meta.locationsDescription },
   };
 }
 

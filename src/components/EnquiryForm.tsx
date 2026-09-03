@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import type { Locale } from '@/lib/i18n';
 import type { Dictionary } from '@/content/dictionary';
+import type { Location } from '@/content/locations';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
@@ -13,7 +14,16 @@ function fieldClasses() {
   return 'w-full bg-transparent border-b border-line py-3 text-ink placeholder:text-muted/60 focus:border-ink outline-none transition-colors';
 }
 
-export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+export default function EnquiryForm({
+  locale,
+  dict,
+  location,
+}: {
+  locale: Locale;
+  dict: Dictionary;
+  /** Set when arrived via ?location=slug — sent through as a hidden field. */
+  location?: Location;
+}) {
   const t = dict.enquiry;
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
@@ -116,6 +126,11 @@ export default function EnquiryForm({ locale, dict }: { locale: Locale; dict: Di
           </Field>
         </div>
       </div>
+
+      {/* Which location this enquiry is about, if arrived via ?location= —
+          already surfaced visibly in the page's aside; this just carries
+          the same identifier through to the submitted payload. */}
+      {location && <input type="hidden" name="location" value={location.slug} />}
 
       {/* Honeypot — hidden from users, catches bots. Do not remove. */}
       <div aria-hidden className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden" >

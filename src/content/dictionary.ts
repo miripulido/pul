@@ -32,9 +32,6 @@ export interface Dictionary {
     productions: string[];
     featuresTitle: string;
     ratesTitle: string;
-    moreTitle: string;
-    moreComing: string;
-    moreBody: string;
     finalHeading: string;
   };
   rates: {
@@ -55,8 +52,6 @@ export interface Dictionary {
     rates: string;
     notes: string;
     interiors: string;
-    comingSoon: string;
-    tba: string;
   };
   about: {
     title: string;
@@ -72,6 +67,8 @@ export interface Dictionary {
   enquiry: {
     title: string;
     lead: string;
+    /** Shown above the form when arrived via ?location=, e.g. "Enquiring about". */
+    enquiringAbout: string;
     labels: {
       name: string;
       company: string;
@@ -156,10 +153,6 @@ const en: Dictionary = {
     ],
     featuresTitle: 'On location',
     ratesTitle: 'Rates',
-    moreTitle: 'More locations',
-    moreComing: 'Coming soon',
-    moreBody:
-      'PUL is growing into a curated network of production locations. New spaces are added as they are selected.',
     finalHeading: 'Have a production in mind?',
   },
   rates: {
@@ -180,8 +173,6 @@ const en: Dictionary = {
     rates: 'Rates',
     notes: 'Production notes',
     interiors: 'Interiors available upon request',
-    comingSoon: 'Coming soon',
-    tba: 'To be announced',
   },
   about: {
     title: 'About',
@@ -204,6 +195,7 @@ const en: Dictionary = {
   enquiry: {
     title: 'Enquire',
     lead: 'Tell us about your production. We reply personally.',
+    enquiringAbout: 'Enquiring about',
     labels: {
       name: 'Name',
       company: 'Company / Brand',
@@ -302,10 +294,6 @@ const es: Dictionary = {
     ],
     featuresTitle: 'En la localización',
     ratesTitle: 'Tarifas',
-    moreTitle: 'Más localizaciones',
-    moreComing: 'Próximamente',
-    moreBody:
-      'PUL crece como una red de localizaciones de producción. Se incorporan nuevos espacios a medida que se seleccionan.',
     finalHeading: '¿Tienes una producción en mente?',
   },
   rates: {
@@ -326,8 +314,6 @@ const es: Dictionary = {
     rates: 'Tarifas',
     notes: 'Notas de producción',
     interiors: 'Interiores disponibles bajo petición',
-    comingSoon: 'Próximamente',
-    tba: 'Por anunciar',
   },
   about: {
     title: 'Estudio',
@@ -350,6 +336,7 @@ const es: Dictionary = {
   enquiry: {
     title: 'Consultar',
     lead: 'Cuéntanos sobre tu producción. Respondemos personalmente.',
+    enquiringAbout: 'Consulta sobre',
     labels: {
       name: 'Nombre',
       company: 'Empresa / Marca',

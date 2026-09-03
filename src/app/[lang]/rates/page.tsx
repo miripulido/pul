@@ -15,6 +15,7 @@ export function generateMetadata({ params }: { params: { lang: string } }): Meta
     description: dict.meta.ratesDescription,
     alternates: { canonical: `/${locale}/rates`, languages: { en: '/en/rates', es: '/es/rates' } },
     openGraph: { title: dict.meta.ratesTitle, description: dict.meta.ratesDescription, url: `/${locale}/rates` },
+    twitter: { card: 'summary_large_image', title: dict.meta.ratesTitle, description: dict.meta.ratesDescription },
   };
 }
 

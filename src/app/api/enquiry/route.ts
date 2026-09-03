@@ -36,6 +36,8 @@ interface EnquiryBody {
   crew?: string;
   message?: string;
   locale?: string;
+  /** Location slug, set when the enquiry arrived via /enquire?location=slug. */
+  location?: string;
   // Honeypot — real users never fill this hidden field.
   website?: string;
 }
@@ -69,6 +71,7 @@ export async function POST(request: Request) {
     shootDate: body.shootDate,
     duration: body.duration,
     crew: body.crew,
+    location: body.location,
     locale: body.locale,
   });
   // ────────────────────────────────────────────────────────────────────────────

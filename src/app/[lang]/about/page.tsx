@@ -14,6 +14,9 @@ export function generateMetadata({ params }: { params: { lang: string } }): Meta
     description: dict.meta.aboutDescription,
     alternates: { canonical: `/${locale}/about`, languages: { en: '/en/about', es: '/es/about' } },
     openGraph: { title: dict.meta.aboutTitle, description: dict.meta.aboutDescription, url: `/${locale}/about` },
+    // Left unset, this silently inherits the root layout's homepage Twitter
+    // card instead of this page's own — see the location page's comment.
+    twitter: { card: 'summary_large_image', title: dict.meta.aboutTitle, description: dict.meta.aboutDescription },
   };
 }
 

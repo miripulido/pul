@@ -2,6 +2,13 @@ import Image from 'next/image';
 import type { Media } from '@/content/locations';
 import type { Locale } from '@/lib/i18n';
 
+// The placeholder frame's own tiny label — not worth threading the full
+// Dictionary through every MediaFrame call site for two words.
+const PLACEHOLDER_LABEL: Record<Locale, { image: string; video: string }> = {
+  en: { image: 'Image', video: 'Video' },
+  es: { image: 'Imagen', video: 'Vídeo' },
+};
+
 interface MediaFrameProps {
   media: Media;
   locale: Locale;
@@ -78,7 +85,7 @@ export default function MediaFrame({
         >
           {/* Discreet frame markers — reads as intentional, not unfinished. */}
           <span className="text-eyebrow uppercase tracking-label text-muted/70">
-            {isVideo ? 'Video' : 'Image'}
+            {isVideo ? PLACEHOLDER_LABEL[locale].video : PLACEHOLDER_LABEL[locale].image}
           </span>
           <span className="text-eyebrow uppercase tracking-label text-muted/70">
             {media.ratio.replace('/', ':')}

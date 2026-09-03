@@ -12,33 +12,9 @@ interface LocationCardProps {
   sizes?: string;
 }
 
-/**
- * One card in the collection grid. Available locations link through and react
- * to hover; coming-soon entries are deliberate, quiet placeholders that make
- * the collection read as a growing series rather than a single listing.
- */
+/** One card in the collection grid, linking through to a location's page. */
 export default function LocationCard({ location, locale, dict, sizes }: LocationCardProps) {
   const title = location.title[locale];
-
-  if (location.status === 'coming-soon') {
-    return (
-      <div className="group flex flex-col">
-        <div
-          className="relative flex items-center justify-center border border-line bg-transparent transition-colors duration-slow ease-arch group-hover:border-ink/30"
-          style={{ aspectRatio: '3 / 2' }}
-        >
-          <span className="text-eyebrow uppercase tracking-label text-muted/60 transition-colors duration-slow ease-arch group-hover:text-muted">
-            {dict.location.comingSoon}
-          </span>
-        </div>
-        <div className="mt-5 flex items-baseline justify-between">
-          <span className="eyebrow">{location.number}</span>
-          <span className="eyebrow text-muted/70">{location.tagline[locale]}</span>
-        </div>
-      </div>
-    );
-  }
-
   const href = `/${locale}/locations/${location.slug}`;
 
   return (
