@@ -21,7 +21,7 @@ export default function OpengraphImage({ params }: { params: { lang: string } })
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#F4F2EE',
+          background: '#FFFFFF',
           color: '#141210',
           padding: 80,
           fontFamily: 'Helvetica, Arial, sans-serif',

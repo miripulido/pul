@@ -4,7 +4,7 @@ import { availableLocations } from '@/content/locations';
 import { site } from '@/content/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ['', '/locations', '/about', '/rates', '/enquire'];
+  const staticPaths = ['', '/about', '/rates', '/enquire'];
   const entries: MetadataRoute.Sitemap = [];
 
   for (const locale of locales) {

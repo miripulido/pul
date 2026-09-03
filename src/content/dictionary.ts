@@ -7,7 +7,6 @@ import type { Locale } from '@/lib/i18n';
  */
 export interface Dictionary {
   nav: {
-    locations: string;
     about: string;
     rates: string;
     enquire: string;
@@ -21,7 +20,6 @@ export interface Dictionary {
     viewLocation: string;
     /** Short form for tight spaces — a cursor badge, not a link label. */
     view: string;
-    allLocations: string;
     back: string;
     /** Carousel button aria-labels. */
     prev: string;
@@ -64,10 +62,6 @@ export interface Dictionary {
     body: string[];
     principlesTitle: string;
     principles: { term: string; def: string }[];
-  };
-  locationsPage: {
-    title: string;
-    lead: string;
   };
   enquiry: {
     title: string;
@@ -116,8 +110,6 @@ export interface Dictionary {
     aboutDescription: string;
     ratesTitle: string;
     ratesDescription: string;
-    locationsTitle: string;
-    locationsDescription: string;
     enquireTitle: string;
     enquireDescription: string;
   };
@@ -125,7 +117,6 @@ export interface Dictionary {
 
 const en: Dictionary = {
   nav: {
-    locations: 'Locations',
     about: 'About',
     rates: 'Rates',
     enquire: 'Enquire',
@@ -138,7 +129,6 @@ const en: Dictionary = {
     requestAvailability: 'Request availability',
     viewLocation: 'View location',
     view: 'View',
-    allLocations: 'All locations',
     back: 'Back',
     prev: 'Previous',
     next: 'Next',
@@ -196,10 +186,6 @@ const en: Dictionary = {
       { term: 'Camera-first', def: 'Spaces judged by how they read on camera — architecture, light, framing.' },
       { term: 'Discreet', def: 'Exact addresses stay private. Access is arranged for confirmed productions.' },
     ],
-  },
-  locationsPage: {
-    title: 'Locations',
-    lead: 'A curated collection for creative production. Beginning in Madrid.',
   },
   enquiry: {
     title: 'Enquire',
@@ -259,9 +245,6 @@ const en: Dictionary = {
     ratesTitle: 'Rates — PUL',
     ratesDescription:
       'Production location rates in Madrid. Half day €1,200, full day €2,000. Additional hours quoted separately. Interiors on request.',
-    locationsTitle: 'Locations — PUL',
-    locationsDescription:
-      'A curated collection of production locations, beginning in Madrid. Film, photo and advertising locations.',
     enquireTitle: 'Enquire — PUL',
     enquireDescription:
       'Request availability for production locations in Madrid. Campaigns, film, editorial and stills.',
@@ -270,7 +253,6 @@ const en: Dictionary = {
 
 const es: Dictionary = {
   nav: {
-    locations: 'Localizaciones',
     about: 'Estudio',
     rates: 'Tarifas',
     enquire: 'Consultar',
@@ -283,7 +265,6 @@ const es: Dictionary = {
     requestAvailability: 'Solicitar disponibilidad',
     viewLocation: 'Ver localización',
     view: 'Ver',
-    allLocations: 'Todas las localizaciones',
     back: 'Volver',
     prev: 'Anterior',
     next: 'Siguiente',
@@ -341,10 +322,6 @@ const es: Dictionary = {
       { term: 'Ante la cámara', def: 'Espacios juzgados por cómo se leen ante la cámara: arquitectura, luz, encuadre.' },
       { term: 'Discreción', def: 'Las direcciones exactas permanecen privadas. El acceso se organiza para producciones confirmadas.' },
     ],
-  },
-  locationsPage: {
-    title: 'Localizaciones',
-    lead: 'Una colección para producción creativa. Empezando en Madrid.',
   },
   enquiry: {
     title: 'Consultar',
@@ -404,9 +381,6 @@ const es: Dictionary = {
     ratesTitle: 'Tarifas — PUL',
     ratesDescription:
       'Tarifas de localizaciones de producción en Madrid. Media jornada 1.200 €, jornada completa 2.000 €. Horas adicionales aparte. Interiores bajo petición.',
-    locationsTitle: 'Localizaciones — PUL',
-    locationsDescription:
-      'Una colección de localizaciones de producción, empezando en Madrid. Localizaciones para cine, foto y publicidad.',
     enquireTitle: 'Consultar — PUL',
     enquireDescription:
       'Solicita disponibilidad de localizaciones de producción en Madrid. Campañas, cine, editorial y foto fija.',

@@ -27,7 +27,6 @@ export default function Nav({ locale, dict }: NavProps) {
   const base = `/${locale}`;
 
   const links = [
-    { href: `${base}/locations`, label: dict.nav.locations },
     { href: `${base}/about`, label: dict.nav.about },
     { href: `${base}/rates`, label: dict.nav.rates },
   ];

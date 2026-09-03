@@ -12,7 +12,7 @@ const config: Config = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      paper: '#F4F2EE', // warm off-white — the page
+      paper: '#FFFFFF', // the page
       ink: '#141210', // near-black — text
       muted: '#726B63', // neutral grey — secondary text
       line: '#D8D3CB', // hairline rules

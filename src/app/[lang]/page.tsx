@@ -11,6 +11,7 @@ import WordReveal from '@/components/WordReveal';
 import MediaFrame from '@/components/MediaFrame';
 import ParallaxHero from '@/components/ParallaxHero';
 import WorkCarousel from '@/components/WorkCarousel';
+import BrandMarquee from '@/components/BrandMarquee';
 
 export default function Home({ params }: { params: { lang: string } }) {
   const locale: Locale = isLocale(params.lang) ? params.lang : 'en';
@@ -182,12 +183,13 @@ export default function Home({ params }: { params: { lang: string } }) {
         <div className="mt-12">
           <WorkCarousel images={workImages} locale={locale} dict={dict} />
         </div>
-        <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-5 border-t border-line pt-8">
-          {brands.map((brand) => (
-            <span key={brand} className="eyebrow text-muted/70">{brand}</span>
-          ))}
-        </div>
       </section>
+
+      {/* Brand marks — full-bleed, outside `wrap`, so the marquee has the
+          whole viewport to enter from and exit into. */}
+      <div className="mt-16 sm:mt-20">
+        <BrandMarquee brands={brands} />
+      </div>
 
       {/* ------------------------------------------------------------ FINAL CTA */}
       <section className="wrap mt-28 sm:mt-48">

@@ -26,7 +26,7 @@ export function generateMetadata({
   const dict = getDictionary(locale);
   const location = getLocation(params.slug);
   if (!location || location.status !== 'available' || !location.meta) {
-    return { title: dict.meta.locationsTitle };
+    return { title: dict.meta.homeTitle };
   }
   const path = `/${locale}/locations/${location.slug}`;
   return {
@@ -88,8 +88,8 @@ export default function LocationDetail({
 
       {/* Header */}
       <div className="flex items-baseline justify-between border-b border-line pb-6">
-        <Link href={`${base}/locations`} className="link eyebrow">
-          ← {dict.actions.allLocations}
+        <Link href={base} className="link eyebrow">
+          ← {dict.actions.back}
         </Link>
         <span className="eyebrow">{location.place} · {site.coordinates}</span>
       </div>

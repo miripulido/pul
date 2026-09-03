@@ -130,6 +130,18 @@
     display: none;
   }
 
+  /* Brand marquee — the doubled track scrolls exactly one copy-width (-50%)
+     so the loop is seamless; linear + infinite keeps the speed constant
+     with no start or end. Paused on hover so a stray mark can be read.
+     prefers-reduced-motion is handled by the global animation-duration
+     override further down, not repeated here. */
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
   /* Plays once on mount — for content that appears in place (form success/
      error states, page-level entrances) rather than scrolling into view,
      so the IntersectionObserver-driven [data-reveal] hooks don't apply. */
@@ -146,6 +158,16 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Exactly one copy-width, since the track is the brand list doubled. */
+    transform: translateX(-50%);
   }
 }
 

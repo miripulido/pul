@@ -20,7 +20,6 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: Diction
 
           <nav className="md:col-span-3" aria-label="Footer">
             <ul className="flex flex-col gap-3 text-eyebrow uppercase tracking-label">
-              <li><Link href={`${base}/locations`} className="link text-muted hover:text-ink">{dict.nav.locations}</Link></li>
               <li><Link href={`${base}/about`} className="link text-muted hover:text-ink">{dict.nav.about}</Link></li>
               <li><Link href={`${base}/rates`} className="link text-muted hover:text-ink">{dict.nav.rates}</Link></li>
               <li><Link href={`${base}/enquire`} className="link text-muted hover:text-ink">{dict.nav.enquire}</Link></li>
