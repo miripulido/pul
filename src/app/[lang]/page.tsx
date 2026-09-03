@@ -3,12 +3,14 @@ import type { Locale } from '@/lib/i18n';
 import { isLocale } from '@/lib/i18n';
 import { getDictionary } from '@/content/dictionary';
 import { availableLocations, pricing } from '@/content/locations';
+import { workImages, brands } from '@/content/work';
 import { site } from '@/content/site';
 import { formatPrice } from '@/lib/format';
 import Reveal from '@/components/Reveal';
 import WordReveal from '@/components/WordReveal';
 import MediaFrame from '@/components/MediaFrame';
 import ParallaxHero from '@/components/ParallaxHero';
+import WorkCarousel from '@/components/WorkCarousel';
 
 export default function Home({ params }: { params: { lang: string } }) {
   const locale: Locale = isLocale(params.lang) ? params.lang : 'en';
@@ -166,6 +168,24 @@ export default function Home({ params }: { params: { lang: string } }) {
               {dict.nav.rates} →
             </Link>
           </Reveal>
+        </div>
+      </section>
+
+      {/* --------------------------------------------------------- SELECTED WORK */}
+      <section className="wrap mt-28 sm:mt-40">
+        <div className="border-t border-line pt-6">
+          <span className="eyebrow">{dict.home.workTitle}</span>
+        </div>
+        <Reveal as="p" className="mt-6 max-w-2xl text-lead tracking-tight text-muted">
+          {dict.home.workLead}
+        </Reveal>
+        <div className="mt-12">
+          <WorkCarousel images={workImages} locale={locale} dict={dict} />
+        </div>
+        <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-5 border-t border-line pt-8">
+          {brands.map((brand) => (
+            <span key={brand} className="eyebrow text-muted/70">{brand}</span>
+          ))}
         </div>
       </section>
 

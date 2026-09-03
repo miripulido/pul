@@ -23,6 +23,9 @@ export interface Dictionary {
     view: string;
     allLocations: string;
     back: string;
+    /** Carousel button aria-labels. */
+    prev: string;
+    next: string;
   };
   home: {
     heroTagline: string;
@@ -32,6 +35,8 @@ export interface Dictionary {
     productions: string[];
     featuresTitle: string;
     ratesTitle: string;
+    workTitle: string;
+    workLead: string;
     finalHeading: string;
   };
   rates: {
@@ -135,6 +140,8 @@ const en: Dictionary = {
     view: 'View',
     allLocations: 'All locations',
     back: 'Back',
+    prev: 'Previous',
+    next: 'Next',
   },
   home: {
     heroTagline: 'Locations for creative production.',
@@ -153,6 +160,8 @@ const en: Dictionary = {
     ],
     featuresTitle: 'On location',
     ratesTitle: 'Rates',
+    workTitle: 'For brands and productions',
+    workLead: 'The kind of campaigns and content our locations are built for.',
     finalHeading: 'Have a production in mind?',
   },
   rates: {
@@ -276,6 +285,8 @@ const es: Dictionary = {
     view: 'Ver',
     allLocations: 'Todas las localizaciones',
     back: 'Volver',
+    prev: 'Anterior',
+    next: 'Siguiente',
   },
   home: {
     heroTagline: 'Localizaciones para producción creativa.',
@@ -294,6 +305,8 @@ const es: Dictionary = {
     ],
     featuresTitle: 'En la localización',
     ratesTitle: 'Tarifas',
+    workTitle: 'Para marcas y producciones',
+    workLead: 'El tipo de campañas y contenido para el que están pensadas nuestras localizaciones.',
     finalHeading: '¿Tienes una producción en mente?',
   },
   rates: {

@@ -120,6 +120,16 @@
     @apply border-0 border-t border-line;
   }
 
+  /* Hides the scrollbar on a native-scroll element (the work carousel) —
+     scroll/swipe/keyboard behaviour is untouched, only the bar is hidden. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Plays once on mount — for content that appears in place (form success/
      error states, page-level entrances) rather than scrolling into view,
      so the IntersectionObserver-driven [data-reveal] hooks don't apply. */
