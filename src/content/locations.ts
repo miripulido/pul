@@ -101,9 +101,9 @@ export const locations: Location[] = [
       en: 'Offered primarily for exterior productions. Interiors available upon request.',
       es: 'Se ofrece principalmente para producciones de exterior. Interiores disponibles bajo petición.',
     },
-    // A drone push-in over the house at golden hour, colour-graded and cut
-    // into a forward+reverse loop so it never hard-cuts back to start —
-    // see hero-poster.jpg for the paint-in frame while the video buffers.
+    // The owner's own drone footage at golden hour, straight from the
+    // source (rotated to landscape only — no trim, no grade, per their
+    // request). See hero-poster.jpg for the paint-in frame while it buffers.
     hero: {
       ratio: '16/9',
       src: '/images/the-american-house/hero.mp4',
