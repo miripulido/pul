@@ -53,6 +53,7 @@ export default function MediaFrame({
         isVideo ? (
           <video
             src={media.src}
+            poster={media.poster}
             aria-label={alt}
             autoPlay
             muted

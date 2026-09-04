@@ -28,6 +28,8 @@ export interface Media {
    * changes.
    */
   type?: 'image' | 'video';
+  /** video only — the frame shown before playback starts/while it buffers. */
+  poster?: string;
 }
 
 export type LocalizedText = Record<Locale, string>;
@@ -99,27 +101,33 @@ export const locations: Location[] = [
       en: 'Offered primarily for exterior productions. Interiors available upon request.',
       es: 'Se ofrece principalmente para producciones de exterior. Interiores disponibles bajo petición.',
     },
+    // A drone push-in over the house at golden hour, colour-graded and cut
+    // into a forward+reverse loop so it never hard-cuts back to start —
+    // see hero-poster.jpg for the paint-in frame while the video buffers.
     hero: {
       ratio: '16/9',
-      src: '/images/the-american-house/hero.jpg',
+      src: '/images/the-american-house/hero.mp4',
+      type: 'video',
+      poster: '/images/the-american-house/hero-poster.jpg',
       alt: {
-        en: 'Wraparound porch of the American house at golden hour',
-        es: 'Porche envolvente de la casa americana al atardecer',
+        en: 'Drone flyover of the American house at golden hour',
+        es: 'Vista aérea con dron de la casa americana al atardecer',
       },
     },
-    // Ordered for pacing, not capture order: wide establishing shot, then
-    // the dusk photo (the strongest single image — was previously buried
-    // last, so it never appeared in the homepage's 4-image teaser, which
-    // slices the first four) as an early mood contrast, then the graphic
-    // shutter-detail shot, then two more architecture shots, with the
-    // plainest (garage) held for last. Ratios are matched to each slot's
-    // shape in both the homepage grid and this page's own layout — see the
-    // `layout` array in [slug]/page.tsx.
+    // Ordered for pacing, not capture order: the former hero photo opens
+    // (still a strong shot, now that the hero slot itself is video), then
+    // the dusk photo (previously buried last, so it never appeared in the
+    // homepage's 4-image teaser, which slices the first four) as an early
+    // mood contrast, then the graphic shutter-detail shot, then three more
+    // architecture shots, with the plainest (garage) held back. Ratios are
+    // matched to each slot's shape in both the homepage grid and this
+    // page's own layout — see the `layout` array in [slug]/page.tsx.
     gallery: [
-      { ratio: '3/2', src: '/images/the-american-house/gallery-01.jpg', alt: { en: 'Aerial view of the facade and gable roofline', es: 'Vista aérea de la fachada y los tejados a dos aguas' } },
+      { ratio: '16/9', src: '/images/the-american-house/hero.jpg', alt: { en: 'Wraparound porch of the American house at golden hour', es: 'Porche envolvente de la casa americana al atardecer' } },
       { ratio: '4/5', src: '/images/the-american-house/gallery-06.jpg', alt: { en: 'The house at dusk', es: 'La casa al anochecer' } },
       { ratio: '4/5', src: '/images/the-american-house/gallery-03.jpg', alt: { en: 'Detail of black shutters and porch beams', es: 'Detalle de contraventanas negras y vigas del porche' } },
       { ratio: '3/2', src: '/images/the-american-house/gallery-04.jpg', alt: { en: 'Rooftop and chimney architecture', es: 'Arquitectura de tejados y chimenea' } },
+      { ratio: '3/2', src: '/images/the-american-house/gallery-01.jpg', alt: { en: 'Aerial view of the facade and gable roofline', es: 'Vista aérea de la fachada y los tejados a dos aguas' } },
       { ratio: '3/2', src: '/images/the-american-house/gallery-05.jpg', alt: { en: 'Garage detail', es: 'Detalle de garaje' } },
       { ratio: '4/5', src: '/images/the-american-house/gallery-02.jpg', alt: { en: 'Porch entrance with gable and chimney detail', es: 'Entrada del porche con detalle de aguilón y chimenea' } },
     ],

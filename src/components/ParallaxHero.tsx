@@ -78,6 +78,7 @@ export default function ParallaxHero({ media, locale, sizes = '100vw', priority,
         {isVideo ? (
           <video
             src={media.src}
+            poster={media.poster}
             aria-label={media.alt[locale]}
             autoPlay
             muted

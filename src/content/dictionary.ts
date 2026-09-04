@@ -60,6 +60,8 @@ export interface Dictionary {
     title: string;
     lead: string;
     body: string[];
+    locationTitle: string;
+    locationNote: string;
     principlesTitle: string;
     principles: { term: string; def: string }[];
   };
@@ -180,6 +182,8 @@ const en: Dictionary = {
       'PUL represents locations selected for creative production — advertising, film, editorial and content. We look for spaces with a strong architectural point of view and light that holds up on camera.',
       'We begin with a single house in Madrid and grow deliberately, one location at a time. Each is chosen, not listed.',
     ],
+    locationTitle: 'Where',
+    locationNote: 'Madrid, Spain. The exact address stays private — access is arranged directly with confirmed productions.',
     principlesTitle: 'Approach',
     principles: [
       { term: 'Curated', def: 'Each location is selected, not aggregated. Quality over quantity.' },
@@ -316,6 +320,8 @@ const es: Dictionary = {
       'PUL representa localizaciones seleccionadas para producción creativa: publicidad, cine, editorial y contenido. Buscamos espacios con una arquitectura de carácter y una luz que aguanta ante la cámara.',
       'Empezamos con una única casa en Madrid y crecemos con criterio, una localización cada vez. Cada una se elige, no se lista.',
     ],
+    locationTitle: 'Dónde',
+    locationNote: 'Madrid, España. La dirección exacta permanece privada — el acceso se organiza directamente con producciones confirmadas.',
     principlesTitle: 'Criterio',
     principles: [
       { term: 'Selección', def: 'Cada localización se elige, no se agrega. Calidad antes que cantidad.' },

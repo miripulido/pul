@@ -27,27 +27,71 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
 
   return (
     <article className="wrap pt-16 sm:pt-24">
-      <div className="flex items-baseline justify-between border-b border-line pb-6">
+      {/* This header, the h1 and the intro paragraphs are all visible on
+          load without scrolling on most viewports — a scroll-triggered
+          Reveal never gets a chance to animate content that's already in
+          view the instant it mounts (IntersectionObserver's first callback
+          fires already-intersecting, so React sets [data-shown] before the
+          browser's first paint, and there's nothing left to transition
+          from). `.enter-rise` is the mount-triggered equivalent used
+          elsewhere for exactly this case (EnquiryForm's fields, its
+          success/error state) — staggered here the same way. Content
+          further down the page (Approach, the final CTA) genuinely is
+          off-screen at load, so it keeps the normal scroll-triggered
+          Reveal. */}
+      <div className="enter-rise flex items-baseline justify-between border-b border-line pb-6">
         <span className="eyebrow">{dict.about.title}</span>
         <span className="eyebrow">{site.location}</span>
       </div>
 
-      <Reveal as="h1" className="mt-16 text-h1 font-medium tracking-tightest max-w-[18ch]">
+      <h1
+        className="enter-rise mt-16 text-h1 font-medium tracking-tightest max-w-[18ch]"
+        style={{ animationDelay: '80ms' }}
+      >
         {dict.about.lead}
-      </Reveal>
+      </h1>
 
       <div className="mt-16 grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-12">
-        <div className="md:col-span-3">
+        <div className="enter-rise md:col-span-3" style={{ animationDelay: '140ms' }}>
           <span className="eyebrow">01 — {dict.about.title}</span>
         </div>
         <div className="md:col-span-8 space-y-6 text-lead tracking-tight">
           {dict.about.body.map((p, i) => (
-            <Reveal as="p" key={i} delay={i * 60}>
+            <p key={i} className="enter-rise" style={{ animationDelay: `${180 + i * 80}ms` }}>
               {p}
-            </Reveal>
+            </p>
           ))}
         </div>
       </div>
+
+      {/* ------------------------------------------------------------- WHERE */}
+      <section className="mt-28 sm:mt-40">
+        <div className="border-t border-line pt-6">
+          <span className="eyebrow">{dict.about.locationTitle}</span>
+        </div>
+        <div className="mt-8 grid grid-cols-1 gap-x-12 gap-y-6 md:grid-cols-12">
+          <Reveal className="md:col-span-4">
+            <p className="text-lead tracking-tight max-w-xs">{dict.about.locationNote}</p>
+          </Reveal>
+          <Reveal className="md:col-span-8" delay={80} variant="mask">
+            {/* City-level view only, no marker — the address itself is
+                never shown, matching the "Discreet" principle below.
+                Grayscale keeps the map from introducing colour into the
+                UI chrome; photography stays the site's only source of it. */}
+            <div
+              className="relative overflow-hidden border border-line bg-ink-faint"
+              style={{ aspectRatio: '16 / 9' }}
+            >
+              <iframe
+                title="Madrid"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-3.83%2C40.30%2C-3.58%2C40.53&layer=mapnik"
+                className="absolute inset-0 h-full w-full grayscale contrast-[1.1]"
+                loading="lazy"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       <section className="mt-28 sm:mt-40">
         <div className="border-t border-line pt-6">
