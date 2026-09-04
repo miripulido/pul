@@ -60,7 +60,7 @@ export default function MediaFrame({
             playsInline
             preload="metadata"
             className={
-              'absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-arch ' +
+              'photo-grade absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-arch ' +
               (hover ? 'group-hover:scale-[1.03]' : '')
             }
           />
@@ -72,7 +72,7 @@ export default function MediaFrame({
             sizes={sizes}
             priority={priority}
             className={
-              'object-cover transition-transform duration-[900ms] ease-arch ' +
+              'photo-grade object-cover transition-transform duration-[900ms] ease-arch ' +
               (hover ? 'group-hover:scale-[1.03]' : '')
             }
           />

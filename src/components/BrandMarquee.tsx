@@ -19,7 +19,7 @@ export default function BrandMarquee({ brands }: BrandMarqueeProps) {
         {track.map((brand, i) => (
           <span
             key={i}
-            className="whitespace-nowrap text-h2 font-medium tracking-tighter text-muted/60"
+            className="whitespace-nowrap text-h2 font-medium tracking-tighter text-muted/80"
           >
             {brand}
           </span>

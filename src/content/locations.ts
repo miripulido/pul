@@ -107,13 +107,21 @@ export const locations: Location[] = [
         es: 'Porche envolvente de la casa americana al atardecer',
       },
     },
+    // Ordered for pacing, not capture order: wide establishing shot, then
+    // the dusk photo (the strongest single image — was previously buried
+    // last, so it never appeared in the homepage's 4-image teaser, which
+    // slices the first four) as an early mood contrast, then the graphic
+    // shutter-detail shot, then two more architecture shots, with the
+    // plainest (garage) held for last. Ratios are matched to each slot's
+    // shape in both the homepage grid and this page's own layout — see the
+    // `layout` array in [slug]/page.tsx.
     gallery: [
       { ratio: '3/2', src: '/images/the-american-house/gallery-01.jpg', alt: { en: 'Aerial view of the facade and gable roofline', es: 'Vista aérea de la fachada y los tejados a dos aguas' } },
-      { ratio: '4/5', src: '/images/the-american-house/gallery-02.jpg', alt: { en: 'Porch entrance with gable and chimney detail', es: 'Entrada del porche con detalle de aguilón y chimenea' } },
+      { ratio: '4/5', src: '/images/the-american-house/gallery-06.jpg', alt: { en: 'The house at dusk', es: 'La casa al anochecer' } },
       { ratio: '4/5', src: '/images/the-american-house/gallery-03.jpg', alt: { en: 'Detail of black shutters and porch beams', es: 'Detalle de contraventanas negras y vigas del porche' } },
       { ratio: '3/2', src: '/images/the-american-house/gallery-04.jpg', alt: { en: 'Rooftop and chimney architecture', es: 'Arquitectura de tejados y chimenea' } },
       { ratio: '3/2', src: '/images/the-american-house/gallery-05.jpg', alt: { en: 'Garage detail', es: 'Detalle de garaje' } },
-      { ratio: '4/5', src: '/images/the-american-house/gallery-06.jpg', alt: { en: 'The house at dusk', es: 'La casa al anochecer' } },
+      { ratio: '4/5', src: '/images/the-american-house/gallery-02.jpg', alt: { en: 'Porch entrance with gable and chimney detail', es: 'Entrada del porche con detalle de aguilón y chimenea' } },
     ],
     meta: {
       title: {

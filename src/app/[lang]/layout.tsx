@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Archivo } from 'next/font/google';
 import '../globals.css';
 import { locales, isLocale, type Locale } from '@/lib/i18n';
 import { getDictionary } from '@/content/dictionary';
@@ -7,6 +8,12 @@ import { site } from '@/content/site';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import PageTransition from '@/components/PageTransition';
+
+// The site's single typeface (see globals.css's `--font-sans` comment) —
+// a licensed-quality grotesk self-hosted via next/font, replacing the old
+// system-Helvetica fallback stack. Variable weight, so font-medium /
+// font-semibold etc. all render as real cuts, not synthesized bold.
+const archivo = Archivo({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -66,7 +73,7 @@ export default function LangLayout({
   const dict = getDictionary(locale);
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={archivo.variable}>
       <body className="flex min-h-screen flex-col">
         <a
           href="#main"

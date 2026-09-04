@@ -52,7 +52,7 @@ export default function Nav({ locale, dict }: NavProps) {
 
   return (
     <>
-    <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur-[2px] border-b border-line">
+    <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-md border-b border-line">
       <nav className="wrap flex items-center justify-between h-16 sm:h-20" aria-label="Primary">
         <Link
           href={base}

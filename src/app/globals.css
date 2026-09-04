@@ -8,11 +8,11 @@
  * ------------------------------------------------------------------ */
 
 :root {
-  /* The single typeface stack for the entire site.
-     Swap this one line for a licensed grotesk (Neue Haas, Söhne, Aktiv)
-     loaded via next/font and the whole site follows. */
-  --font-sans: 'Helvetica Neue', 'Helvetica', 'Arial', system-ui, -apple-system,
-    'Segoe UI', Roboto, sans-serif;
+  /* The single typeface for the entire site — Archivo, loaded via
+     next/font/google in [lang]/layout.tsx, which sets this variable on
+     <html> (with its own font-stack fallbacks appended). This is just a
+     safety-net value for the rare moment before that class is present. */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   --gutter: clamp(1.25rem, 5vw, 5rem);
 
@@ -118,6 +118,15 @@
 
   .hairline {
     @apply border-0 border-t border-line;
+  }
+
+  /* One quiet grade over every photograph (real or stock) — a hair more
+     contrast and a hair less saturation — so images shot on different
+     phones in different light still read as one considered system rather
+     than an ungraded snapshot dump. Subtle on purpose: photography is
+     still the site's only source of colour (see tailwind.config.ts). */
+  .photo-grade {
+    filter: contrast(1.04) saturate(0.92) brightness(1.01);
   }
 
   /* Hides the scrollbar on a native-scroll element (the work carousel) —
